@@ -100,6 +100,14 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     #killproc $prog コメントアウトコメントアウトしてから
     killproc -p $pid $prog を追加
     
+nginxの設定設定を変更変更する
+
+    location ~\.pl|cgi$ {
+    fastcgi_index index.pl;
+    fastcgi_pass unix:/var/run/fcgiwrap/fcgiwrap.sock
+    fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
+    include       fastcgi_params;
+    }
 ###SELINUXの設定を確認する。  
 SELINUX=disabledにする
 
