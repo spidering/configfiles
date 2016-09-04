@@ -1,0 +1,8 @@
+FCGI_USER=vagrant
+FCGI_GROUP=vagrant
+FCGI_PROGRAM=/usr/local/sbin/fcgiwrap
+FCGI_PID=/var/run/fcgiwrap/spawn-fcgi.pid
+FCGI_SOCKET=/var/run/fcgiwrap/fcgiwrap.sock
+FCGI_EXTRA_OPTIONS="-M 0700"
+OPTIONS="-u $FCGI_USER -g $FCGI_GROUP -s $FCGI_SOCKET -S $FCGI_EXTRA_OPTIONS -F 1 -P $FCGI_PID -- $FCGI_PROGRAM"
+
