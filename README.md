@@ -51,8 +51,10 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     make  
     sudo make install  
 
+
 ######TCP Socketで動かす場合
 /etc/sysconfig/spawn-fcgiの最終行に
+
     OPTIONS="-u nginx -g nginx -a 127.0.0.1 -p 9001 -P /var/run/spawn-fcgi.pid -- /usr/local/sbin/fcgiwrap" を追加。
     # You must set some working options before the "spawn-fcgi" service will work.
     # If SOCKET points to a file, then this file is cleaned up by the init script.
@@ -63,9 +65,10 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     #SOCKET=/var/run/php-fcgi.sock
     #OPTIONS="-u apache -g apache -s $SOCKET -S -M 0600 -C 32 -F 1 -P /var/run/spawn-fcgi.pid -- /usr/bin/php-cgi"
     OPTIONS="-u nginx -g nginx -a 127.0.0.1 -p 9001 -P /var/run/spawn-fcgi.pid -- /usr/local/sbin/fcgiwrap" ←これを追記
-    
+[spawn-fcgiダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/init.d/spawn-fcgi-tcpsocket "spawn-fcgi")
+
 /etc/nginx/conf.d/default.confのserverセクションに追記
-    
+
     location ~ \.pl|cgi$ {
     fastcgi_pass 127.0.0.1:9001;
     fastcgi_index index.cgi;
