@@ -42,7 +42,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
        fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
     }
     
-###SPAWN-FCGIをインストール
+###SPAWN-FCGIとfcgiwrapをインストール
     sudo yum install --enablerepo=epel spawn-fcgi fcgi-devel  
     git clone https://github.com/gnosek/fcgiwrap.git fcgiwrap  
     cd fcgiwrap  
@@ -73,7 +73,33 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     include       fastcgi_params;
     }
 ######Unix Socketで動かす場合
+/etc/sysconfig/fcgiwrapの設定
 
+    FCGI_USER=vagrant
+    FCGI_GROUP=vagrant
+    FCGI_PROGRAM=/usr/local/sbin/fcgiwrap
+    FCGI_SOCKET=/var/run/fcgiwrap/fcgiwrap.sock
+    FCGI_EXTRA_OPTIONS="-M 0700"
+    OPTIONS="-u $FCGI_USER -g $FCGI_GROUP -s $FCGI_SOCKET -S $FCGI_EXTRA_OPTIONS -F 1 -P -$FCGI_PID -- $FCGI_PROGRAM"
+    
+    /etc/init.d/spawn-fcgiの修正
+    下記の部分をコメントアウトまたは削除。ここではコメントアウトを既にしている状態
+    #exec="/usr/bin/spawn-fcgi"
+    #cgi="/usr/local/sbin/fcgiwrap"
+    #config="/etc/sysconfig/spawn-fcgi"
+    続いて下記をを追加
+    
+    exec="/usr/bin/spawn-fcgi"
+    cgi="/usr/local/sbin/fcgiwrap"
+    prog="`basename $cgi`
+    config="/etc/sysconfig/$prog"
+    pid="/var/run/fcviwrap/spawn-fcgi.pid"
+    SOCKET="/var/run/fcgiwrap/fcgiwrap.sock"
+    
+    続いてstop()項目にある
+    #killproc $prog コメントアウトコメントアウトしてから
+    killproc -p $pid $prog を追加
+    
 ###SELINUXの設定を確認する。  
 SELINUX=disabledにする
 
