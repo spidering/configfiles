@@ -100,7 +100,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     #killproc $prog コメントアウトコメントアウトしてから
     killproc -p $pid $prog を追加
     
-nginxの設定設定を変更変更する
+nginxの設定を変更する
 
     location ~\.pl|cgi$ {
     fastcgi_index index.pl;
