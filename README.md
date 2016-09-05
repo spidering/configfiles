@@ -36,6 +36,14 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
 
 [php-fpm.serviceダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm.service)
 
+/home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.confの設定。以下修正箇所
+    pid = /var/run/php-fpm.pid
+    error_log = /var/log/php-fpm/php-fpm.log
+    user = vagrant #/etc/nginx/nginx.conのuserと合わせる
+    group = vagrant
+[php-fpm.confダウンロード](#)
+    
+
 自動起動させる為に、systemctl enable nginxとsystemctl enable php-fpmをおこうなう。
 /etc/nginx/conf.d/default.confに追記
 
