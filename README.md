@@ -93,7 +93,9 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fast_cgi_script_name; 
     include       fastcgi_params;
     }
-######Unix Socketで動かす場合
+
+######UNIX Socketで動かす場合
+
 /etc/sysconfig/fcgiwrapの設定
 
     FCGI_USER=vagrant
