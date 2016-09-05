@@ -12,6 +12,7 @@ PHP5_VER="5.6.25"
 export PATH="/home/vagrant/.phpenv/versions/${PHP5_VER}/sbin:$PATH"
 を追加。
 
+##PHPの設定
 ###php-fpmの起動スクリプトを作成
 phpenvでPHPをインストールした際に作成されるディレクトリの中にある。
 場所は、/tmp/php-build/source/5.6.25/sapi/fpm/php-fpm.service
@@ -43,7 +44,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
        fastcgi_index index.php;
        fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
     }
-    
+##Perlの設定    
 ###SPAWN-FCGIとfcgiwrapをインストール
     sudo yum install --enablerepo=epel spawn-fcgi fcgi-devel  
     git clone https://github.com/gnosek/fcgiwrap.git fcgiwrap  
