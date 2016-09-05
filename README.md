@@ -36,9 +36,10 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
 
 [php-fpm.serviceダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm.service)
 
+######TCPSocketで動かす
 /home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.confの設定
 
-    pid = /var/run/php-fpm.pid
+    pid = /home/vagrant/.phpenv/versions/5.6.25/var/run/php-fpm.pid
     error_log = /var/log/php-fpm/php-fpm.log
     user = vagrant #/etc/nginx/nginx.conのuserと合わせる
     group = vagrant
@@ -54,6 +55,9 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
        fastcgi_index index.php;
        fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
     }
+######UnixSocketで動かす
+/home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.confの設定
+
 ##Perlの設定    
 ###SPAWN-FCGIとfcgiwrapをインストール
     sudo yum install --enablerepo=epel spawn-fcgi fcgi-devel  
