@@ -45,18 +45,34 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     group = vagrant
     
 [php-fpm.confダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm.conf)
-    
-
 自動起動させる為に、systemctl enable nginxとsystemctl enable php-fpmをおこうなう。
+
+######Nginxの設定を変更する
 /etc/nginx/conf.d/default.confに追記
 
     location ~\.php$ {#phpにアクセスした時にダウンロードされてしまう場合、設定が間違っていなくても無駄なスペースが原因の事もあるので注意
        fastcgi_pass 127.0.0.1:9001;
        fastcgi_index index.php;
        fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
+       include       fastcgi_params;
     }
 ######UnixSocketで動かす
 /home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.confの設定
+
+    ;listen = 127.0.0.1:9000 コメント
+    listen = /home/vagrant/.phpenv/versions/5.6.25/var/run/php-fpm.sock
+
+[php-fpm.confダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm-unixsocket.conf)
+
+######Nginxの設定を変更する
+/etc/nginx/conf.d/defaultconfを変更
+
+    location ~\.php$ {
+      fastcgi_pass unix:/home/vagrant/.phpenv/versions/5.6.25/var/run/php-fpm.sock;
+      fastcgi_index index.php
+      fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
+      include       fastcgi_params;
+    }
 
 ##Perlの設定    
 ###SPAWN-FCGIとfcgiwrapをインストール
