@@ -25,7 +25,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     
     [Service]
     Type=simple  
-    PIDFile=/var/run/php-fpm.pid  
+    PIDFile=/home/vagrant/.phpenv/versions/5.6.25/var/run/php-fpm.pid  
     ExecStart=/home/vagrant/.phpenv/versions/5.6.25/sbin/php-fpm --nodaemonize --fpm-config   /home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.conf  
     ExecReload=/bin/kill -USR2 $MAINPID  
     ExecStop=/bin/kill -s QUIT $MAINPID  
@@ -40,7 +40,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
 /home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.confの設定
 
     pid = /home/vagrant/.phpenv/versions/5.6.25/var/run/php-fpm.pid
-    error_log = /var/log/php-fpm/php-fpm.log
+    error_log = /home/vagrant/.phpenv/versions/5.6.25/var/log/php-fpm.log
     user = vagrant #/etc/nginx/nginx.conのuserと合わせる
     group = vagrant
     
