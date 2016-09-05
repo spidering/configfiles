@@ -61,6 +61,9 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
 
     ;listen = 127.0.0.1:9000 コメント
     listen = /home/vagrant/.phpenv/versions/5.6.25/var/run/php-fpm.sock
+    listen.owner = vagrant
+    listen.group = vagrant
+    listen.mode = 0600
 
 [php-fpm.confダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm-unixsocket.conf)
 
