@@ -34,7 +34,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     [Install]  
     WantedBy=multi-user.target  
 
-[php-fpm.serviceダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm.service)
+[php-fpm.serviceダウンロード](https://github.com/spidering/configfiles/blob/master/php-fpm.service)
 
 ######TCPSocketで動かす
 /home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.confの設定
@@ -44,7 +44,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     user = vagrant #/etc/nginx/nginx.conのuserと合わせる
     group = vagrant
     
-[php-fpm.confダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm.conf)
+[php-fpm.confダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm.service)
     
 
 自動起動させる為に、systemctl enable nginxとsystemctl enable php-fpmをおこうなう。
