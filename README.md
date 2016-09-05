@@ -39,7 +39,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
 自動起動させる為に、systemctl enable nginxとsystemctl enable php-fpmをおこうなう。
 /etc/nginx/conf.d/default.confに追記
 
-    location ~\.php$ {
+    location ~\.php$ {#phpにアクセスした時にダウンロードされてしまう場合、設定が間違っていなくても無駄なスペースが原因の事もあるので注意
        fastcgi_pass 127.0.0.1:9001;
        fastcgi_index index.php;
        fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
