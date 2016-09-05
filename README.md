@@ -33,6 +33,8 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     [Install]  
     WantedBy=multi-user.target  
 
+[php-fpm.serviceダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/php-fpm.service)
+
 自動起動させる為に、systemctl enable nginxとsystemctl enable php-fpmをおこうなう。
 /etc/nginx/conf.d/default.confに追記
 
@@ -51,8 +53,10 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     make  
     sudo make install  
 
+
 ######TCP Socketで動かす場合
-    /etc/sysconfig/spawn-fcgiの最終行に
+/etc/sysconfig/spawn-fcgiの最終行に
+
     OPTIONS="-u nginx -g nginx -a 127.0.0.1 -p 9001 -P /var/run/spawn-fcgi.pid -- /usr/local/sbin/fcgiwrap" を追加。
     # You must set some working options before the "spawn-fcgi" service will work.
     # If SOCKET points to a file, then this file is cleaned up by the init script.
@@ -63,6 +67,8 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     #SOCKET=/var/run/php-fcgi.sock
     #OPTIONS="-u apache -g apache -s $SOCKET -S -M 0600 -C 32 -F 1 -P /var/run/spawn-fcgi.pid -- /usr/bin/php-cgi"
     OPTIONS="-u nginx -g nginx -a 127.0.0.1 -p 9001 -P /var/run/spawn-fcgi.pid -- /usr/local/sbin/fcgiwrap" ←これを追記
+[spawn-fcgi-tcpsocketダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/init.d/spawn-fcgi-tcpsocket)
+
 /etc/nginx/conf.d/default.confのserverセクションに追記
 
     location ~ \.pl|cgi$ {
@@ -81,9 +87,11 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     FCGI_SOCKET=/var/run/fcgiwrap/fcgiwrap.sock
     FCGI_EXTRA_OPTIONS="-M 0700"
     OPTIONS="-u $FCGI_USER -g $FCGI_GROUP -s $FCGI_SOCKET -S $FCGI_EXTRA_OPTIONS -F 1 -P -$FCGI_PID -- $FCGI_PROGRAM"
+[fcgiwrapダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/fcgiwrap)
+
+/etc/init.d/spawn-fcgiの修正
+下記の部分をコメントアウトまたは削除。ここではコメントアウトを既にしている状態
     
-    /etc/init.d/spawn-fcgiの修正
-    下記の部分をコメントアウトまたは削除。ここではコメントアウトを既にしている状態
     #exec="/usr/bin/spawn-fcgi"
     #cgi="/usr/local/sbin/fcgiwrap"
     #config="/etc/sysconfig/spawn-fcgi"
@@ -99,7 +107,8 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     続いてstop()項目にある
     #killproc $prog コメントアウトコメントアウトしてから
     killproc -p $pid $prog を追加
-    
+[spawn-fcgi-unixsocketダウンロード](https://raw.githubusercontent.com/spidering/configfiles/master/init.d/spawn-fcgi-unixsocket)
+
 nginxの設定を変更する
 
     location ~\.pl|cgi$ {
