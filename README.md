@@ -55,7 +55,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
        fastcgi_index index.php;
        fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name;
     }
-######UnixSocketで動かす
+######UnixSocketで動かす
 /home/vagrant/.phpenv/versions/5.6.25/etc/php-fpm.confの設定
 
 ##Perlの設定    
