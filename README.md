@@ -112,6 +112,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name; 
     include       fastcgi_params;
     }
+後は、spawn-fcgiとnginxを起動。systemctl start spawn-fcgi systectl start nginx
 
 ######UNIX Socketで動かす場合
 
