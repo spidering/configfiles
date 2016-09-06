@@ -109,7 +109,7 @@ phpenvでPHPをインストールした際に作成されるディレクトリ�
     fastcgi_pass 127.0.0.1:9001;
     fastcgi_index index.cgi;
     #$document_root$fast_cgi_script_nameとする記述もあるがうまくいかなかった
-    fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fast_cgi_script_name; 
+    fastcgi_param SCRIPT_FILENAME /home/vagrant/www/html$fastcgi_script_name; 
     include       fastcgi_params;
     }
 
